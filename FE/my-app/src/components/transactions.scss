@@ -1,0 +1,25 @@
+.transactions{
+    margin-top: 3em;
+
+    .transaction{
+        border: 1px solid blue;
+        padding: 15px;
+        border-radius: 4px;
+
+        &__top{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &__bottom{
+            margin-top: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &__fym{
+
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.main{
+    width: 100%;
+    padding: 2em;
+}
+
+.home__container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    &-actions{
+        display: flex;
+        flex: 0.7;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
