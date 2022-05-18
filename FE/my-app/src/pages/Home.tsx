@@ -1,7 +1,17 @@
 import React from 'react'
 import { Transactions } from '../components/Transactions'
 import "./home.scss"
+import { useAppDispatch } from '../app/hooks';
+import { closeModal, openModal } from '../features/modal/ModalSlice';
 export const Home = () => {
+
+
+  const dispatch =  useAppDispatch()
+
+  const addTransaction = ()=>{
+    dispatch(openModal())
+  }
+
   return (
     <main className='main'>
         <div className='home__container'>
@@ -11,7 +21,7 @@ export const Home = () => {
             </div>
             <div className='home__container-actions'>
              <h2>filter</h2>
-             <button>
+             <button onClick={addTransaction}>
                ADD
              </button>
             </div>
