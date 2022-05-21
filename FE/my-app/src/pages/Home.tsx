@@ -1,5 +1,5 @@
 import React from 'react'
-import { Transactions } from '../components/Transactions'
+import { Transactions } from '../features/transaction/Transactions'
 import "./home.scss"
 import { useAppDispatch } from '../app/hooks';
 import { closeModal, openModal } from '../features/modal/ModalSlice';

@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
-import './App.css';
+import './App.scss';
 import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
-import Modal from "react-modal"
-import { useAppDispatch, useAppSelector } from '../src/app/hooks';
-import { closeModal, selectModal } from './features/modal/ModalSlice';
+import { ModalCustom } from './features/modal/Modal';
 
 const customStyles = {
   content: {
@@ -16,41 +14,20 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    // padding: "1em"
   },
 };
 
-
-
-Modal.setAppElement("#root")
 function App() {
 
-  const {modalIsOpen} = useAppSelector(selectModal)
-  const dispatch = useAppDispatch()
-  console.log(modalIsOpen)
-  const closeModalApp = ()=>{
-    dispatch(closeModal())
-  }
+  
+  // console.log(select)
   return (
     <div className="App">
      <Navbar />
      <Home />
-     <Modal
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        // onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button> */}
-        <div>I am a modal</div>
-        <button onClick={closeModalApp}>X</button>
-        <form>
-          <input />
-         
-          <button>Agregar</button>
-        </form>
-      </Modal>
+     <ModalCustom />
+     
     </div>
   );
 }
