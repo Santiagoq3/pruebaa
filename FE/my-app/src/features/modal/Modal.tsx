@@ -3,18 +3,20 @@ import Modal from "react-modal"
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { closeModal, selectModal } from './ModalSlice';
 import { useForm } from "../../hooks/useForm";
+import { addTransaction } from '../transaction/transactionSlice';
 export const ModalCustom = () => {
 
+  const dispatch = useAppDispatch()
   const {modalIsOpen} = useAppSelector(selectModal)
 
-  const dispatch = useAppDispatch()
-  const [select, setSelect] = useState("")
-  const [values,handleInputChange] =  useForm({
+
+  const [select, setSelect] = useState("ingreso")
+
+  const {amount,concept,handleInputChange} =  useForm({
     concept: "",
     amount: ""
   })
 
-  console.log(values)
 
   const closeModalApp = ()=>{
     dispatch(closeModal())
@@ -24,6 +26,24 @@ export const ModalCustom = () => {
   const selectHandleChange = (e: React.ChangeEvent<HTMLSelectElement>)=>{
     const v = e.target.value
     setSelect(v)
+  }
+
+  const handleSendForm = (e: React.FormEvent)=>{
+    e.preventDefault()
+
+    const newTransaction = {
+      id: "#789789",
+      date: "25 feb 2022",
+      category: "comida",
+      concept,
+      price:amount,
+      type: select
+    }
+    dispatch(addTransaction(newTransaction))
+    // aqui dispatch
+
+    console.log(newTransaction)
+
   }
   
   
@@ -70,15 +90,15 @@ export const ModalCustom = () => {
           <p>Ingrese los datos </p>
           <button onClick={closeModalApp}>X</button>
         </div>
-        <form className='form'>
-          <input name='concept' autoFocus type={"text"} placeholder={"ingrese el concepto..."} />
-          <input name='amount' type={'number'} placeholder={"ingrese el monto..."} />
+        <form onSubmit={handleSendForm} className='form'>
+          <input onChange={handleInputChange} name='concept' value={concept} autoFocus type={"text"} placeholder={"ingrese el concepto..."} />
+          <input onChange={handleInputChange} name='amount' value={amount} type={'text'} placeholder={"ingrese el monto..."} />
           <label>Tipo:</label>
-          <select onChange={selectHandleChange}>
+          <select value={select} onChange={selectHandleChange}>
             <option  value={"ingreso"}>Ingreso</option>
             <option value={"egreso"}>Egreso</option>
           </select>
-          <button>Agregar</button>
+          <button type='submit'>Agregar</button>
         </form>
       </Modal>
     </>

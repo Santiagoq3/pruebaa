@@ -5,7 +5,7 @@ interface TransactionProps{
   transaction: Itransaction
 }
 export const Transaction:FC<TransactionProps> = ({transaction}) => {
-  const {id,category,date,price,type} = transaction
+  const {id,category,date,price,type,concept} = transaction
   return (
     <>
         <div className='transaction'>

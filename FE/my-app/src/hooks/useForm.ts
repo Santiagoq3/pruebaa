@@ -1,25 +1,20 @@
 import { useState } from 'react';
 import React from 'react';
 
-interface HandleNameChangeInterface {
-    target: HTMLInputElement;
-}
-interface IinputTransaction{
-    concept: string,
-    amount:string
-}
+// interface HandleNameChangeInterface {
+//     target: HTMLInputElement;
+// }
+// interface IinputTransaction{
+//     concept: string,
+//     amount:string
+// }
 
-export const useForm = ( initialState = {
-    concept: "",
-    amount: ""
-} ) => {
+export const useForm = <T>( initialState : T  ) => {
     
-    const [values, setValues] = useState<IinputTransaction>(initialState);
-
-    const reset = ( newFormState = initialState ) => {
-        setValues( newFormState );
-    }
-
+    const [values, setValues] = useState(initialState);
+    // const reset = ( newFormState = initialState ) => {
+    //     setValues( newFormState );
+    // }
 
     const handleInputChange = ( e : React.ChangeEvent<HTMLInputElement> ) => {
 
@@ -30,6 +25,9 @@ export const useForm = ( initialState = {
 
     }
 
-    return [ values, handleInputChange, reset ];
+    return{
+        ...values,
+        handleInputChange
+    }
 
 }

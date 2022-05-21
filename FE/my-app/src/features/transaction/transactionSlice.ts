@@ -4,7 +4,7 @@ import { Itransaction } from './Transactions';
 
 
 export  interface transactionState{
-    transactions: [],
+    transactions: any[],
 
 }
 
@@ -22,7 +22,8 @@ export const transactionSlice = createSlice({
         //     state.uid = action.payload.uid
         // },
         addTransaction: (state, action:PayloadAction<Itransaction>)=>{
-          console.log(action.payload)
+            console.log(state.transactions)
+          state.transactions.push(action.payload)
         },
         // closeModal: (state)=>{
         //     state.modalIsOpen  = false
@@ -32,3 +33,11 @@ export const transactionSlice = createSlice({
     //     builder.addCase()
     // }
 })
+
+export const {addTransaction} = transactionSlice.actions;
+
+export const  selectTransaction = (state: RootState) => state.transaction
+
+
+export default transactionSlice.reducer
+
